@@ -104,6 +104,6 @@ public class Main {
 				+ "Número de alunos aprovados: %d\n"
 				+ "Número de alunos em recuperação: %d\n"
 				+ "Número de alunos reprovados: %d\n"
-				+ "Média geral da turma: %2.2f\n", total_students, approved_students, recovery_students, reproved_students, general_average);
+				+ "Média geral da turma: %2.2f\n\n", total_students, approved_students, recovery_students, reproved_students, general_average);
 	}
 }
