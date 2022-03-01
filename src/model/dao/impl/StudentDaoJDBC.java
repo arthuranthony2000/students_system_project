@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import db.DB;
@@ -74,6 +75,42 @@ public class StudentDaoJDBC implements StudentDao {
 
 	@Override
 	public List<Student> findAll() {
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("SELECT * FROM tbl_student ORDER BY pk_number");
+			rs = st.executeQuery();
+			
+			List<Student> list = new ArrayList<Student>();
+			
+			while(rs.next()) {
+				Student obj = new Student(rs.getInt("pk_number"), rs.getString("name_student"),
+						rs.getString("course"), rs.getFloat("nota1"), rs.getFloat("nota2"),
+						rs.getFloat("nota3"), rs.getFloat("nota4"));
+				list.add(obj);
+			}
+			return list;
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
